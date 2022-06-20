@@ -1,4 +1,4 @@
- Block scope-ի և function scope-ի միջև տարբերությունը:
+  Block scope-ի և function scope-ի միջև տարբերությունը:
 
 1.Ի տարբերություն block scope-ի function scope-երը ավելի խիստ են։ 
 2.Նանց միջից նույնիսկ var-ը չի կարող դուրս գալ։

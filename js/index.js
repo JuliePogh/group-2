@@ -80,6 +80,10 @@ const app = {
         }
 	],
 	callCenter(address, telNumber, isDelivery, isOpen, type,restaurantMenu){
+		if(app.restaurantDetails[7].isOpen){
+			console.log("Ներեցեք, զանգերի կենտրոնը այժմ փակ է։");
+		} else{
+		
 		return `
 			Բարև Ձեզ, Ձեզ սպասարկում է ${app.restaurantStaff[13].customer}ը
 			${
@@ -115,14 +119,9 @@ const app = {
 			Ներեցեք, մենք գարեջուր չունենք։ Դուք կարող եք պատվիրել՝
 			${Object.values(app.restaurantMenu[2])}
 			`;
-		    },
+		    }
+		},
 			
-	 //isOpened(start,end){
-		//start >= end ? 
-		//app.restaurantDetails[7].isOpen = false: 
-		//app.restaurantDetails[7].isOpen = true;
-
-		//},
 	 isOpened(start,end){
 		 if(start >= end && this.callCenter === false){
 		 console.log("Ներեցեք, զանգերի կենտրոնը այժմ փակ է։");
@@ -134,13 +133,7 @@ const app = {
 	}
 	 };
 	
-	/*if(app.restaurantDetails[7].isOpen === false && app.callCenter() === false){
-		//console.log("կներեք մենք փակ ենք");
-	} else {
-		//app.callCenter();
-	} 
- 
-
+	
         
 app.isOpened(9, 24);
 
