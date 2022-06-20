@@ -1,0 +1,20 @@
+{
+  "name": "group2",
+  "version": "1.0.0",
+  "description": "npm lesson",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Juli",
+    "js",
+    "Hayastan"
+  ],
+  "author": "Julieta Poghosyan",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "jshint": "^2.13.4"
+  }
+}
