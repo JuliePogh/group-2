@@ -114,3 +114,4 @@ for (let i = 0; i < tabBtns.length; i++) {
 	  tabBodys[i].classList.add("tab_body-active");
 	});
   } 
+
