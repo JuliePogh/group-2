@@ -31,20 +31,38 @@ const UI = {
 		this.screenBlock.append(this.screenInput, this.screenAddBtn);
 	},
 
-	toHTML(id, value) {
-		this.listsBlock.innerHTML += `
+	toHTML(id, value, isComplete) {
+		if(isComplete){
+			this.listsBlock.innerHTML += `
 			<div class="listsBlockItem">
 				<div class="listsBlockItemContent">
 					<span>${id}</span>
-					<input type="text" value="${value}" readonly}>
+					<input class="disabled" type="text" value="${value}" readonly>
 				</div>
 				<div class="buttons">
+					<button class="complitedBtn">Finally</button>
 					<button class="removeBtn">Remove</button>
 					<button class="editBtn">Edit</button>
 					<button class="saveBtn">Save</button>
 				</div>
 			</div>
 		`;
+		}else{
+			this.listsBlock.innerHTML += `
+			<div class="listsBlockItem">
+				<div class="listsBlockItemContent">
+					<span>${id}</span>
+					<input type="text" value="${value}" readonly>
+				</div>
+				<div class="buttons">
+					<button class="complitedBtn">End Work</button>
+					<button class="removeBtn">Remove</button>
+					<button class="editBtn">Edit</button>
+					<button class="saveBtn">Save</button>
+				</div>
+			</div>
+		`;
+		}
 	},
 
 	start() {
@@ -80,14 +98,16 @@ POST();
 async function GET() {
 	return await fetch(url)
 		.then(data => data.json())
-		.then(data => data.forEach(obj => UI.toHTML(obj.id, obj.title)))
+		.then(data => data.forEach(obj => UI.toHTML(obj.id, obj.title, obj.isComplete)))
 		.then(() => {
 			PUT(
 				document.querySelectorAll(".editBtn"),
 				document.querySelectorAll(".saveBtn"),
-				document.querySelectorAll(".listsBlockItemContent")
+				document.querySelectorAll(".listsBlockItemContent"),
+				
 			);
 			DELETE(document.querySelectorAll(".removeBtn"));
+			isCompleted(document.querySelectorAll(".complitedBtn"),);
 		})
 }
 
@@ -95,21 +115,23 @@ GET();
 
 function PUT(editBtnArray, saveBtnArray, content) {
 	editBtnArray.forEach((editBtn, index) => {
-		editBtn.addEventListener("click", () => {
-			editBtn.style.display = "none";
-			saveBtnArray[index].style.display = "inline-block";
-			const fakeID = parseInt(content[index].children[0].textContent);
+		editBtn.addEventListener("click", (e) => {
 			const input = content[index].children[1];
-			input.classList.add("edit");
-			input.removeAttribute("readonly");
-
+			const fakeID = parseInt(content[index].children[0].textContent);
+			if(content[index].children[1].classList[0] !== "disabled"){
+				editBtn.style.display = "none";
+				saveBtnArray[index].style.display = "inline-block";
+				input.classList.add("edit");
+				input.removeAttribute("readonly");
+			}
 			saveBtnArray[index].addEventListener("click", async () => {
+				
 				await fetch(`${url}/${fakeID}`, {
 					method: "PUT",
 					headers: {
 						"content-type": "application/json"
 					},
-					body: JSON.stringify({ title: input.value.trim(), isComplete: false })
+					body: JSON.stringify({ title: input.value.trim(), isComplete: input.classList[0] === "disabled" ? true : false})
 				});
 			});
 		})
@@ -124,6 +146,22 @@ function DELETE(removeBtn) {
 
 			await fetch(`${url}/${fakeID}`, {
 				method: "DELETE"
+			})
+		});
+	});
+}
+
+function isCompleted(complitedBtn) {
+	complitedBtn.forEach(btn => {
+		btn.addEventListener("click", async (e) => {
+			const fakeID = parseInt(btn.parentElement.previousElementSibling.firstElementChild.textContent);
+			const input = e.target.parentElement.parentElement.children[0].children[1];
+			await fetch(`${url}/${fakeID}`, {
+				method: "PUT",
+				headers: {
+					"content-type": "application/json"
+				},
+				body: JSON.stringify({title: input.value.trim(), isComplete: true })
 			});
 		});
 	});

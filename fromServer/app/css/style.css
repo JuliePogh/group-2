@@ -23,48 +23,6 @@ body {
 	display: flex;
 	margin-bottom: 24px;
 }
-
-#root #app-form #screenBlock input {
-	padding: 10px;
-	border: 1px solid #ccc;
-	border-radius: 5px 0px 0px 5px;
-	width: 100%;
-}
-
-#root #app-form #screenBlock #screenAddBtn {
-	background: #1a90d2;
-	color: #fff;
-	border: none;
-	padding: 0px 8px;
-	cursor: pointer;
-	border-radius: 0px 5px 5px 0px;
-}
-
-*{
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	outline: 0;
-}
-
-body {
-	padding: 30px;
-	font-family: Arial;
-	background: #ddd;
-}
-
-#root {
-	padding: 30px;
-	background: #fff;
-	border-radius: 5px;
-	max-width: 500px;
-	margin: 0 auto;
-}
-
-#root #app-form #screenBlock {
-	display: flex;
-	margin-bottom: 24px;
-}
 #root #app-form #screenBlock input {
 	padding: 10px;
 	border: 1px solid #ccc;
@@ -99,6 +57,11 @@ body {
 	border-radius: 5px;
 }
 
+#root #listBlock .listsBlockItem .listsBlockItemContent input.disabled{
+	text-decoration: line-through;
+	color: #038282;
+}
+
 #root #listBlock .listsBlockItem .listsBlockItemContent input.edit {
 	border-color: #ccc;
 }
@@ -114,12 +77,15 @@ body {
 }
 
 #root #listBlock .listsBlockItem .buttons .removeBtn {
-	background: #d00100;
+	background: #961b1b;
 }
 
+#root #listBlock .listsBlockItem .buttons .complitedBtn {
+	background: #038282;
+}
 
 #root #listBlock .listsBlockItem .buttons .editBtn {
-	background: #ffc000;
+	background: #9c7a13;
 }
 
 #root #listBlock .listsBlockItem .buttons .saveBtn {
@@ -134,7 +100,9 @@ body {
 #root #listBlock .listsBlockItem .buttons .editBtn:hover {
 	background: #efb403;
 }
-
+#root #listBlock .listsBlockItem .buttons .complitedBtn:hover {
+	background: #075f5f;
+}
 #root #listBlock .listsBlockItem .buttons .saveBtn:hover {
 	background: #c311e2;
 }
