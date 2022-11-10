@@ -1,4 +1,4 @@
-module.exports = function (editBtnArray, saveBtnArray, content, url) {
+export default function (editBtnArray, saveBtnArray, content, url) {
 	editBtnArray.forEach((editBtn, index) => {
 		editBtn.addEventListener("click", () => {
 			editBtn.style.display = "none";
@@ -14,9 +14,9 @@ module.exports = function (editBtnArray, saveBtnArray, content, url) {
 					headers: {
 						"content-type": "application/json"
 					},
-					body: JSON.stringify({ title: input.value.trim()})
+					body: JSON.stringify({ title: input.value.trim() })
 				});
 			});
 		});
 	});
-};
+}

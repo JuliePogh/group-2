@@ -1,4 +1,4 @@
-module.exports = function (form, input, url) {
+export default async function (form, input, url) {
 	form.addEventListener("submit", async (e) => {
 		e.preventDefault();
 
@@ -9,10 +9,9 @@ module.exports = function (form, input, url) {
 					"content-type": "application/json"
 				},
 				body: JSON.stringify({ title: input.value.trim(), isComplete: false })
-			});
+			})
 		}
 
 		e.target.reset();
 	});
-};
-
+}

@@ -1,36 +1,32 @@
 "use strict";
 
-const UI = require("./modules/ui");
-const POST = require("./modules/postMethod");
-const GET = require("./modules/getMethod");
-const PUT = require("./modules/putMethod");
-const DELETE = require("./modules/deleteMethod");
-const COMPLETE = require("./modules/complete");
+import UI from "./modules/ui";
+import POST from "./modules/postMethod";
+import GET from "./modules/getMethod";
+import PATCH from "./modules/patchMethod";
+import DELETE from "./modules/deleteMethod";
+import COMPLETE from "./modules/complete";
+import FILTER from "./modules/filter";
+import SELECT from "./modules/select";
 
-const url = "http://localhost:8888/todos";
+async function engine () {
+	const url = "http://localhost:8888/todos";
 
+	UI.start();
 
-UI.start();
+	const { form, screenInput } = UI;
 
-const { form, screenInput } = UI;
-
-POST(form, screenInput, url);
-
-
-async function engine() {
+	await POST(form, screenInput, url);
 	await GET(UI, url);
-	PUT(
-		document.querySelectorAll(".editBtn"),
-		document.querySelectorAll(".saveBtn"),
-		document.querySelectorAll(".listsBlockItemContent"),
-		url
+	await SELECT(PATCH, DELETE, COMPLETE, url);
+	await FILTER(
+		document.querySelectorAll("[data-filter]"),
+		url,
+		UI,
+		PATCH, 
+		DELETE, 
+		COMPLETE
 	);
-	DELETE(
-		document.querySelectorAll(".removeBtn"),
-		url
-	);
-	COMPLETE(url, document.querySelectorAll(".buttons input"), document.querySelectorAll(".listsBlockItemContent"))
 }
 
 engine();
-

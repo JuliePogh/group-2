@@ -1,18 +1,18 @@
-module.exports = function (removeBtn, url) {
-	removeBtn.forEach(btn => {
+export default function (removeBtnArray, url) {
+	removeBtnArray.forEach(btn => {
 		btn.addEventListener("click", async () => {
-			const a = confirm("Are you sure ?");
+			const isDelete = confirm("Are you sure ?");
 
-			if (a) {
+			if (isDelete) {
 				const fakeID = parseInt(btn.parentElement.previousElementSibling.firstElementChild.textContent);
 				btn.parentElement.parentElement.remove();
-
-				await fetch(`${url}/${fakeID}`, {
+	
+				await fetch(`${url}/${fakeID},${history}`,  {
 					method: "DELETE"
 				});
 			} else {
-				alert("Good");
+				alert("Good !");
 			}
 		});
 	});
-};
+}

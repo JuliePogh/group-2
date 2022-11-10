@@ -1,19 +1,19 @@
 {
   "todos": [
     {
-      "title": "learn TypeScrit",
+      "title": "learn pyton",
       "isComplete": true,
-      "id": 1
+      "id": 4
     },
     {
-      "title": "learn Vue",
+      "title": "learn vue",
       "isComplete": false,
-      "id": 2
+      "id": 5
     },
     {
-      "title": "learn Angular",
-      "isComplete": true,
-      "id": 3
+      "title": "learn node",
+      "isComplete": false,
+      "id": 6
     }
   ]
 }
