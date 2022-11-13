@@ -1,4 +1,3 @@
-
 export default function (url, checkArr, id) {
 	checkArr.forEach((check, index) => {
 		check.addEventListener("change", async () => {
