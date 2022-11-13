@@ -1,0 +1,33 @@
+
+  .custom-navbar {
+	background: #ffffff;
+	-webkit-box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+	padding: 10px 0;
+	text-align: center;
+  }
+
+  .custom-navbar .navbar-brand,
+  .custom-navbar .nav li a {
+	line-height: normal;
+  }
+
+  .custom-navbar .nav li a {
+	padding: 10px;
+  }
+
+  .custom-navbar .navbar-brand,
+  .top-nav-collapse .navbar-brand {
+	color: #252525;
+	font-weight: 600;
+  }
+
+  .custom-navbar .nav li a,
+  .top-nav-collapse .nav li a {
+	color: #575757;
+  }
+
+  .custom-navbar .navbar-nav.navbar-right li {
+	display: inline-block;
+  }
