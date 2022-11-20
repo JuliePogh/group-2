@@ -1,117 +1,84 @@
 "use strict";
-const poster = document.querySelector("header img");
-const filmsBlock = document.querySelector("#films");
-const form = document.querySelector("#add");
-const signInModalBtn = document.querySelector("[data-in]");
-const signInModal = document.querySelector("[data-in-modal]");
 
-// modal-ի ակտիվ կլասսի անունը "modal_wrapper-active"
-const tabBtns = document.querySelectorAll(".tab_btn");
-const tabBodys = document.querySelectorAll(".tab_body");
+const lime = document.getElementById("lime"),
+btns = document.querySelectorAll("button"),
+flags = document.querySelector("#flags"),
+flag = flags.querySelectorAll(".flag"),
+wrapper = document.querySelector("#wrapper"),
+boxes = wrapper.querySelectorAll(".box"),
+chgitem = document.querySelector("[data-chgitem]");
 
-function init (x) {
-	poster.src = `img/bg${x}.jpg`;
-	if (poster.src.slice(-7) === "bg2.jpg") {
-		poster.alt = "Hitman's Wife's Bodyguard";
-	} else if (poster.src.slice(-7) === "bg1.jpg") {
-		poster.alt = "Gemini Man";
-	}
-	document.title = poster.alt;
-	document.querySelectorAll("#main_promo .mp").forEach(adv => adv.remove());
-}
-init(2);
+// 1)
+lime.style.width = "500px";
+lime.style.height = "500px";
+lime.style.background = "#5d5d5d";
+lime.style.borderRadius = "0px 10%";
 
-const _DB = {
-	movies: [
-		"Logan", "Spider-Man", "The Seven Samurai",
-		"Bonnie and Clyde", "Reservoir Dogs", "Doctor Zhivago",
-		"The Deer Hunter", "Rocky", "Crid"
-	]
-};
+// 2)
+lime.style.cssText = `
+	background: linear-gradient(purple, orange);
+	width: 200px;
+	height: 200px;
+	// border-radius: 0px 10%;
+`;
 
-form.addEventListener("submit", (e) => {
-	e.preventDefault();
-	let val = e.target.firstElementChild.value.trim();
-	const check = document.querySelector("input[name='favorite']");
-	if (val !== "") {
-		if (check.checked) {
-			console.log(`This film <${val}> added to favorite`);
-		}
-		_DB.movies.push(val);
-	}
-	setSort(_DB.movies);
-	createFilmsList(_DB.movies, filmsBlock);
-	e.target.reset();
-});
-function setSort(arr) {
-	arr.sort();
-}
-function createFilmsList (films, parent) {
-	parent.innerHTML = "";
-	setSort(films);
-	films.forEach((film, index) => {
-		parent.innerHTML += `
-			<p>
-				${index + 1}. ${film.length >= 21 ? film.slice(0, 21)+'...' : film} 
-				<span data-rm>&#128465</span>
-			</p>
-		`;
-	});
-	removeFilmFromList("[data-rm]")
-}
-function removeFilmFromList (selector) {
-	setSort(_DB.movies);
-	document.querySelectorAll(selector).forEach((btn, index) => {
-		btn.addEventListener("click", () => {
-			btn.parentElement.remove();
-			_DB.movies.splice(index, 1);
-			createFilmsList (_DB.movies, filmsBlock);
-		});
-	});
-}
-createFilmsList(_DB.movies, filmsBlock); 
-createFilmsList(_DB.movies, filmsBlock);
+// let i = 0;
+// for (let item in window.document.styleSheets[0].ownerNode.style) {
+// 	console.log(item);
+// 	i++;
+// }
+// console.log(i);
 
-signInModalBtn.addEventListener("click", (e) => {
-	e.preventDefault();
-	signInModal.classList.add("modal_wrapper-active");
-});
-signInModal.addEventListener("click", (e) => {
-	// if (e.target.matches("form, h2, input, button")){
-	// 	signInModal.classList.remove("modal_wrapper-active");
-	// }
 
-	if (e.target.matches(".modal_wrapper")){
-		signInModal.classList.remove("modal_wrapper-active");
-	}
+boxes.forEach(item => {
+	item.textContent = `Hello I'm ${50 < 0 ? "Robot" : "Juior"}`;
+	item.style.cssText = `
+		display: flex;
+		align-items: center;
+		background: ${10 < 5 ? "#000" : "#f0f"};
+		width: 200px;
+		height: 200px;
+		border-radius: 10px;
+		color: #fff;
+		font-size: 28px;
+		font-weight: bold;
+		text-align: center;
+		font-family: tahoma
+	`
 });
 
+const text2 = document.createElement("p");// ստեղծում ենք P
+const text1 = document.createElement("p");// ստեղծում ենք P
+text2.textContent = "Hello I'm APPEND";
+text1.textContent = "Hello I'm PREPEND";
+
+wrapper.prepend(text1); // ավելացնում ենք wrapper-ի սկզբում
+
+// wrapper.append(text2); // ավելացնում ենք wrapper-ի վերջում
+wrapper.appendChild(text2) // հին տարբերակ
+
+// lime.remove(); //ջնջում ենք էլեմենտը, որի վրա կանչել ենք
+// document.querySelector("body").removeChild(lime) // հին տարբերակ
+
+// lime.before(flags) // flags թեգը դնում ենք lime-ից առաջ
+document.querySelector("body").insertBefore(flags, lime) // հին տարբերակ
+
+flags.after(wrapper) // wrapper թեգը դնում ենք flags-ից հետո
+
+// lime.replaceWith(chgitem); 
+document.body.replaceChild(chgitem, lime) // հին տարբերակ
+/* 
+	ջնջում ա էն էլեմենտը, որի վրա կանչել ենք,
+	ու տեղը դնում ա էն էլեմենտը որը փոխանցել ենք
+*/
 
 
+const block = document.createElement("div");
+document.body.append(block);
 
-for (let i = 0; i < tabBtns.length; i++) {
-	tabBtns[i].addEventListener("click", () => {
-		for (let x = 0; x < tabBtns.length; x++) {
-			tabBtns[x].classList.remove("tab_btn-active");
-			tabBodys[x].classList.remove("tab_body-active");
-		}
-		tabBtns[i].classList.add("tab_btn-active");
-		tabBodys[i].classList.add("tab_body-active");
-	});
-} 
+block.innerHTML = "<h1 style=\"color: red; font-family: cursive;\">Hello I'm BIG title</h1>";
 
+// textContent => TEXT
+// innerHTML => HTML
 
-
-for (let i = 0; i < tabBtns.length; i++) {
-	tabBtns[i].addEventListener("click", (e) => {
-	  const tba = document.querySelector(".tab_btn-active");
-	  const tbA = document.querySelector(".tab_body-active");
-  
-	  tba.classList.remove("tab_btn-active");
-	  tbA.classList.remove("tab_body-active");
-  
-	  e.target.classList.add("tab_btn-active");
-	  tabBodys[i].classList.add("tab_body-active");
-	});
-  } 
-
+console.log(block);
